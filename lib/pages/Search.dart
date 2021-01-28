@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import '../service/ScreenAdapter.dart';
-import '../service/SearchServices.dart';
+import '../services/ScreenAdapter.dart';
+import '../services/SearchServices.dart';
 
 class SearchPage extends StatefulWidget {
   SearchPage({Key key}) : super(key: key);
@@ -21,42 +21,47 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   _getHistoryData() async {
-    var _historyListData = await SearchServices.getHistoryList();
+     var _historyListData = await SearchServices.getHistoryList();
     setState(() {
-      this._historyListData = _historyListData;
+      this._historyListData=_historyListData;
     });
+  
   }
 
-  _showAlertDialog(keywords) async {
-    var result = await showDialog(
-        barrierDismissible: false, //表示点击灰色背景的时候是否消失弹出框
-        context: context,
-        builder: (context) {
+   _showAlertDialog(keywords) async{
+     
+    var result= await showDialog(
+        barrierDismissible:false,   //表示点击灰色背景的时候是否消失弹出框
+        context:context,
+        builder: (context){
           return AlertDialog(
             title: Text("提示信息!"),
-            content: Text("您确定要删除吗?"),
+            content:Text("您确定要删除吗?") ,
             actions: <Widget>[
               FlatButton(
                 child: Text("取消"),
-                onPressed: () {
+                onPressed: (){
                   print("取消");
-                  Navigator.pop(context, 'Cancle');
+                  Navigator.pop(context,'Cancle');
                 },
               ),
               FlatButton(
                 child: Text("确定"),
-                onPressed: () async {
-                  //注意异步
+                onPressed: () async{            
+                  //注意异步      
                   await SearchServices.removeHistoryData(keywords);
                   this._getHistoryData();
-                  Navigator.pop(context, "Ok");
+                  Navigator.pop(context,"Ok");
                 },
               )
             ],
+
           );
-        });
+        }
+     );
 
     //  print(result);
+
   }
 
   Widget _historyListWidget() {
@@ -65,7 +70,7 @@ class _SearchPageState extends State<SearchPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            child: Text("历史记录", style: Theme.of(context).textTheme.title),
+            child: Text("历史记录", style: Theme.of(context).textTheme.headline6),
           ),
           Divider(),
           Column(
@@ -74,7 +79,7 @@ class _SearchPageState extends State<SearchPage> {
                 children: <Widget>[
                   ListTile(
                     title: Text("${value}"),
-                    onLongPress: () {
+                    onLongPress: (){
                       this._showAlertDialog("${value}");
                     },
                   ),
@@ -91,6 +96,7 @@ class _SearchPageState extends State<SearchPage> {
                 onTap: () {
                   SearchServices.clearHistoryList();
                   this._getHistoryData();
+
                 },
                 child: Container(
                   width: ScreenAdapter.width(400),
@@ -154,7 +160,7 @@ class _SearchPageState extends State<SearchPage> {
           child: ListView(
             children: <Widget>[
               Container(
-                child: Text("热搜", style: Theme.of(context).textTheme.title),
+                child: Text("热搜", style: Theme.of(context).textTheme.headline6),
               ),
               Divider(),
               Wrap(

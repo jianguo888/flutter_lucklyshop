@@ -4,8 +4,6 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    //加载中的圈圈
     return  Center(
       child: Padding(
         padding: EdgeInsets.all(10.0),

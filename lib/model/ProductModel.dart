@@ -1,4 +1,4 @@
-class ProductModel { //处理result
+class ProductModel {
   List<ProductItemModel> result;
 
   ProductModel({this.result});

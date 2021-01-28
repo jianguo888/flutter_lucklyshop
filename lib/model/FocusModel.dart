@@ -1,10 +1,7 @@
 // FocusModel.fromJson(json);
-
 class FocusModel {
   List<FocusItemModel> result;
-
   FocusModel({this.result});
-
   FocusModel.fromJson(Map<String, dynamic> json) {
     if (json['result'] != null) {
       result = new List<FocusItemModel>();
@@ -31,7 +28,6 @@ class FocusItemModel {
   String url;
 
   FocusItemModel({this.sId, this.title, this.status, this.pic, this.url});
-
   FocusItemModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     title = json['title'];
@@ -41,7 +37,6 @@ class FocusItemModel {
   }
 
   Map<String, dynamic> toJson() {
-    //属性转换为Map类型对象
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
     data['title'] = this.title;

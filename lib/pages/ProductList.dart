@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../service/ScreenAdapter.dart';
+import '../services/SearchServices.dart';
+import '../services/ScreenAdapter.dart';
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import '../model/ProductModel.dart';
@@ -358,6 +359,7 @@ class _ProductListPageState extends State<ProductListPage> {
                 ),
               ),
               onTap: () {
+                 SearchServices.setHistoryData(this._keywords);
                  this._subHeaderChange(1);
               },
             )

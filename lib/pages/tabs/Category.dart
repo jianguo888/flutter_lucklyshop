@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../service/ScreenAdapter.dart';
+import '../../services/ScreenAdapter.dart';
 import '../../config/Config.dart';
 import 'package:dio/dio.dart';
 import '../../model/CateModel.dart';
@@ -16,14 +16,16 @@ class _CategoryPageState extends State<CategoryPage>
   int _selectIndex = 0;
   List _leftCateList = [];
   List _rightCateList = [];
+
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
   @override
   void initState() {
     super.initState();
     _getLeftCateData();
-    print("Category");
+    print("category");
   }
 
   //左侧分类
@@ -35,21 +37,20 @@ class _CategoryPageState extends State<CategoryPage>
     setState(() {
       this._leftCateList = leftCateList.result;
     });
-    _getRightCateData(leftCateList.result[0].sId); //第一条数据的id
+    _getRightCateData(leftCateList.result[0].sId);
   }
 
   //右侧分类
   _getRightCateData(pid) async {
     var api = '${Config.domain}api/pcate?pid=${pid}';
-    var result = await Dio().get(api); //请求
-    var rightCateList = new CateModel.fromJson(result.data); //格式化
+    var result = await Dio().get(api);
+    var rightCateList = new CateModel.fromJson(result.data);
     // print(rightCateList.result);
     setState(() {
       this._rightCateList = rightCateList.result;
     });
   }
 
-//左侧页面
   Widget _leftCateWidget(leftWidth) {
     if (this._leftCateList.length > 0) {
       return Container(
@@ -90,7 +91,6 @@ class _CategoryPageState extends State<CategoryPage>
     }
   }
 
-//右侧页面
   Widget _rightCateWidget(rightItemWidth, rightItemHeight) {
     if (this._rightCateList.length > 0) {
       return Expanded(
@@ -112,9 +112,12 @@ class _CategoryPageState extends State<CategoryPage>
                 pic = Config.domain + pic.replaceAll('\\', '/');
 
                 return InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/productList',
-                        arguments: {"cid": this._rightCateList[index].sId});
+                  onTap: (){
+
+                    Navigator.pushNamed(context, '/productList',arguments: {
+                      "cid":this._rightCateList[index].sId
+                    });
+                    
                   },
                   child: Container(
                     // padding: EdgeInsets.all(10),

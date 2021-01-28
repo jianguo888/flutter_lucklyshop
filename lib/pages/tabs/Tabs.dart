@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../service/ScreenAdapter.dart';
+import 'package:flutter_jdshop/services/ScreenAdapter.dart';
 
 import 'Home.dart';
 import 'Category.dart';
 import 'Cart.dart';
 import 'User.dart';
+
 
 class Tabs extends StatefulWidget {
   Tabs({Key key}) : super(key: key);
@@ -13,27 +14,23 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   PageController _pageController;
   @override
   void initState() {
     super.initState();
     this._pageController = new PageController(initialPage: this._currentIndex);
   }
-  
-  List<Widget> _pageList = [
-    //注意顺序
-    HomePage(),
-    CategoryPage(),
-    CartPage(),
-    UserPage()
-  ];
+
+  List<Widget> _pageList = [HomePage(), CategoryPage(), CartPage(), UserPage()];
 
   @override
   Widget build(BuildContext context) {
-     ScreenAdapter.init(context);
+
+    ScreenAdapter.init(context);
+
     return Scaffold(
-      appBar: _currentIndex!=3? AppBar(
+      appBar: _currentIndex!=3?AppBar(
         leading: IconButton(
           icon: Icon(Icons.center_focus_weak, size: 28, color: Colors.black87),
           onPressed: null,
@@ -42,19 +39,23 @@ class _TabsState extends State<Tabs> {
           child: Container(
             height: ScreenAdapter.height(68),
             decoration: BoxDecoration(
-                color: Color.fromRGBO(233, 233, 233, 0.8),
-                borderRadius: BorderRadius.circular(30)),
+              color: Color.fromRGBO(233, 233, 233, 0.8),
+              borderRadius: BorderRadius.circular(30)
+            ),
             padding: EdgeInsets.only(left: 10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Icon(Icons.search),
-                Text("笔记本", style: TextStyle(fontSize: ScreenAdapter.size(28)))
+                Text("笔记本",style: TextStyle(
+                  fontSize: ScreenAdapter.size(28)
+                ))
               ],
             ),
           ),
-          onTap: () {
-            Navigator.pushNamed(context, '/search');
+          onTap: (){
+              Navigator.pushNamed(context, '/search');
+
           },
         ),
         actions: <Widget>[
@@ -74,26 +75,35 @@ class _TabsState extends State<Tabs> {
             this._currentIndex = index;
           });
         },
-        // physics: NeverScrollableScrollPhysics(), //禁止pageView滑动
-      ), //实现底部切换Tab
-
+        physics: NeverScrollableScrollPhysics(), //禁止pageView滑动
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: this._currentIndex, //用于选中的时候切换
+        currentIndex: this._currentIndex,
         onTap: (index) {
           setState(() {
             this._currentIndex = index;
             this._pageController.jumpToPage(index);
           });
         },
-        type: BottomNavigationBarType.fixed, //多个菜单，要记得配置这个选项
+        type: BottomNavigationBarType.fixed,
         fixedColor: Colors.red,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("购物")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.category), title: Text("分类")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), title: Text("购物车")),
-          BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("我的"))
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label:"首页"           
+            ),
+             BottomNavigationBarItem(
+              icon: Icon(Icons.category),
+              label:"分类"             
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+               label:"购物车"            
+            ),            
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people),
+              label:"我的"
+            )
         ],
       ),
     );

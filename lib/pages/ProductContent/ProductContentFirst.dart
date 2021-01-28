@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../config/Config.dart';
+import 'package:flutter_jdshop/services/ScreenAdapter.dart';
+import 'package:flutter_jdshop/widget/JdButton.dart';
+
 import '../../model/ProductContentModel.dart';
-import '../../widget/JdButton.dart';
-import '../../service/ScreenAdapter.dart';
+
+import '../../config/Config.dart';
 
 class ProductContentFirst extends StatefulWidget {
   final List _productContentList;
@@ -107,7 +110,6 @@ class _ProductContentFirstState extends State<ProductContentFirst>
     });
     _getSelectedAttrValue();
   }
-
   //获取选中的值
   _getSelectedAttrValue() {
     var _list = this._attr;

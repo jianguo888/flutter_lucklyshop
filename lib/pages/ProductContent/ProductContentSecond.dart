@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import '../../config/Config.dart';
 
 class ProductContentSecond extends StatefulWidget {
   final List _productContentList;
@@ -26,7 +27,7 @@ class _ProductContentSecondState extends State<ProductContentSecond>
         children: <Widget>[
           Expanded(
             child: InAppWebView(
-              initialUrl: "https://jd.itying.com/pcontent?id=${this._id}",
+              initialUrl: "${Config.domain}pcontent?id=${this._id}",
               onProgressChanged:
                   (InAppWebViewController controller, int progress) {},
             ),

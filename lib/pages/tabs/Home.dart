@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../service/ScreenAdapter.dart';
-
+import 'package:flutter/widgets.dart';
+import '../../model/ProductModel.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import '../../services/ScreenAdapter.dart';
 import '../../config/Config.dart';
 import 'package:dio/dio.dart';
+
 //轮播图类模型
 import '../../model/FocusModel.dart';
-import '../../model/ProductModel.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -19,10 +20,11 @@ class _HomePageState extends State<HomePage>
   List _focusData = [];
   List _hotProductList = [];
   List _bestProductList = [];
+
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
-  //初始化f
+
   @override
   void initState() {
     super.initState();
@@ -31,29 +33,17 @@ class _HomePageState extends State<HomePage>
     _getBestProductData();
   }
 
-//获取轮播图数据
+  //获取轮播图数据
   _getFocusData() async {
-    var api = '${Config.domain}api/focus'; //api接口拼接
-
+    var api = '${Config.domain}api/focus';
     var result = await Dio().get(api);
-
-    // print( focusData.data is Map );
-
     var focusList = FocusModel.fromJson(result.data);
-
-    print(focusList.result);
-
-    // focusList.result.forEach((value) {
-    // print(value.title);
-    // print(value.pic);
-    // });
-
     setState(() {
       this._focusData = focusList.result;
     });
   }
-//获取猜你喜欢数据
 
+  //获取猜你喜欢的数据
   _getHotProductData() async {
     var api = '${Config.domain}api/plist?is_hot=1';
     var result = await Dio().get(api);
@@ -78,86 +68,70 @@ class _HomePageState extends State<HomePage>
     if (this._focusData.length > 0) {
       return Container(
         child: AspectRatio(
-          //配置宽高比
           aspectRatio: 2 / 1,
-          child: new Swiper(
-            itemBuilder: (BuildContext context, int index) {
-              String pic = this._focusData[index].pic;
-              pic = Config.domain + pic.replaceAll('\\', '/');
-              return new Image.network(
-                // "${Config.domain}${pic.replaceAll('\\', '/')}",
-                "${pic}",
-                fit: BoxFit.fill,
-              );
-            },
-            itemCount: this._focusData.length,
-            pagination: new SwiperPagination(), //分页器
-            autoplay: true, //自动轮播
-          ),
+          child: Swiper(
+              itemBuilder: (BuildContext context, int index) {
+                String pic = this._focusData[index].pic;
+                pic = Config.domain + pic.replaceAll('\\', '/');
+                return new Image.network(
+                  "${pic}",
+                  fit: BoxFit.fill,
+                );
+              },
+              itemCount: this._focusData.length,
+              pagination: new SwiperPagination(),
+              autoplay: true),
         ),
       );
     } else {
-      return Text("加载中............");
+      return Text('加载中...');
     }
   }
 
-//标题组件 猜你喜欢以及热门推荐
   Widget _titleWidget(value) {
     return Container(
       height: ScreenAdapter.height(32),
-      // height:32.w,
-      margin: EdgeInsets.only(
-        left: ScreenAdapter.width(10),
-      ), //距离左侧尺寸
-      padding: EdgeInsets.only(left: ScreenAdapter.width(10)),
+      margin: EdgeInsets.only(left: ScreenAdapter.width(20)),
+      padding: EdgeInsets.only(left: ScreenAdapter.width(20)),
       decoration: BoxDecoration(
-        border: Border(
-            left: BorderSide(
-          color: Colors.red,
-          width: ScreenAdapter.width(1),
-        )),
-      ),
+          border: Border(
+              left: BorderSide(
+        color: Colors.red,
+        width: ScreenAdapter.width(10),
+      ))),
       child: Text(
         value,
-        style: TextStyle(
-          color: Colors.black54,
-        ),
+        style: TextStyle(color: Colors.black54),
       ),
     );
   }
+  //热门商品
 
-//    猜你喜欢
   Widget _hotProductListWidget() {
     if (this._hotProductList.length > 0) {
       return Container(
-        height: ScreenAdapter.height(260),
+        height: ScreenAdapter.height(234),
         padding: EdgeInsets.all(ScreenAdapter.width(20)),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemBuilder: (contxt, index) {
             //处理图片
             String sPic = this._hotProductList[index].sPic;
-            sPic = Config.domain + sPic.replaceAll("\\", "/");
+            sPic = Config.domain + sPic.replaceAll('\\', '/');
+
             return Column(
               children: <Widget>[
-                Expanded(
-                  child: Container(
-                    height: ScreenAdapter.height(140),
-                    width: ScreenAdapter.width(140),
-                    margin: EdgeInsets.only(right: ScreenAdapter.width(21)),
-                    child: AspectRatio(
-                      aspectRatio: 1 / 1,
-                      child: Image.network(sPic,
-                          //  "${sPic}",
-                          fit: BoxFit.cover),
-                    ),
-                  ),
+                Container(
+                  height: ScreenAdapter.height(140),
+                  width: ScreenAdapter.width(140),
+                  margin: EdgeInsets.only(right: ScreenAdapter.width(21)),
+                  child: Image.network(sPic, fit: BoxFit.cover),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: ScreenAdapter.height(10)),
-                  height: ScreenAdapter.height(46),
+                  height: ScreenAdapter.height(44),
                   child: Text(
-                    "￥${this._hotProductList[index].price}",
+                    "¥${this._hotProductList[index].price}",
                     style: TextStyle(color: Colors.red),
                   ),
                 )
@@ -168,12 +142,12 @@ class _HomePageState extends State<HomePage>
         ),
       );
     } else {
-      return Text("加载中111111111");
+      return Text("");
     }
   }
 
   //推荐商品
-  Widget _recProducListWidget() {
+  Widget _recProductListWidget() {
     var itemWidth = (ScreenAdapter.getScreenWidth() - 30) / 2;
     return Container(
       padding: EdgeInsets.all(10),
@@ -187,8 +161,9 @@ class _HomePageState extends State<HomePage>
 
           return InkWell(
             onTap: () {
-              Navigator.pushNamed(context, "/productContent",
-                  arguments: {"id": value.sId});
+              Navigator.pushNamed(context, '/productContent',arguments: {
+                "id":value.sId
+              });
             },
             child: Container(
               padding: EdgeInsets.all(10),
@@ -254,14 +229,14 @@ class _HomePageState extends State<HomePage>
     ScreenAdapter.init(context);
 
     return ListView(
-      children: [
+      children: <Widget>[
         _swiperWidget(),
         SizedBox(height: ScreenAdapter.height(20)),
         _titleWidget("猜你喜欢"),
-        SizedBox(height: ScreenAdapter.height(10)),
+        SizedBox(height: ScreenAdapter.height(20)),
         _hotProductListWidget(),
         _titleWidget("热门推荐"),
-        _recProducListWidget(),
+        _recProductListWidget()
       ],
     );
   }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
-// import 'pages/tabs/Tabs.dart';
-
 import 'routers/router.dart';
+
+// 引入provider
+import 'package:provider/provider.dart';
+import 'provider/Counter.dart';
+import 'provider/Cart.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,12 +18,28 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // home: Tabs(),
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/', //配置初始化路由
-      onGenerateRoute: onGenerateRoute,
-      theme: ThemeData(primaryColor: Colors.white),
+    return MultiProvider(
+      providers: [
+      
+        /*
+         provider3.x的配置方法
+          ChangeNotifierProvider(builder: (_) => Counter()),
+          ChangeNotifierProvider(builder: (_) => Cart())   
+        */ 
+
+        //provider4.x的配置方法
+        ChangeNotifierProvider(create: (_) => Counter()),
+        ChangeNotifierProvider(create: (_) => Cart())        
+      ],
+      child: MaterialApp(
+        // home: Tabs(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        onGenerateRoute: onGenerateRoute,
+        theme: ThemeData(
+            // primaryColor: Colors.yellow
+            primaryColor: Colors.white),
+      ),
     );
   }
 }
