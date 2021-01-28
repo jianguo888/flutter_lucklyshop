@@ -17,7 +17,6 @@ class _ProductContentSecondState extends State<ProductContentSecond>
     // TODO: implement initState
     super.initState();
     this._id = widget._productContentList[0].sId;
-    print("--------------------${this._id}");
   }
 
   @override
@@ -27,13 +26,9 @@ class _ProductContentSecondState extends State<ProductContentSecond>
         children: <Widget>[
           Expanded(
             child: InAppWebView(
-              initialUrl: "http://jd.itying.com/pcontent?id=${this._id}",
+              initialUrl: "https://jd.itying.com/pcontent?id=${this._id}",
               onProgressChanged:
-                  (InAppWebViewController controller, int progress) {
-                    setState(() {
-                      
-                    });
-                  },
+                  (InAppWebViewController controller, int progress) {},
             ),
           )
         ],
