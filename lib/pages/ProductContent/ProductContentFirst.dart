@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_jdshop/services/CartServices.dart';
 import 'package:flutter_jdshop/services/ScreenAdapter.dart';
 import 'package:flutter_jdshop/widget/JdButton.dart';
 
 import '../../model/ProductContentModel.dart';
+import '../ProductContent/CartNum.dart';
 
 import '../../config/Config.dart';
+
+
+//广播
+import '../../services/EventBus.dart';
 
 class ProductContentFirst extends StatefulWidget {
   final List _productContentList;
@@ -24,6 +30,8 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
   bool get wantKeepAlive => true;
 
+  var actionEventBus;
+
   @override
   void initState() {
     super.initState();
@@ -33,43 +41,25 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
     _initAttr();
 
-    //[{"cate":"鞋面材料","list":["牛皮 "]},{"cate":"闭合方式","list":["系带"]},{"cate":"颜色","list":["红色","白色","黄色"]}]
 
-    // list":["系带","非系带"]
 
-    /*   
-   [
-     
-      {
-       "cate":"尺寸",
-       list":[{
+    //监听广播
+    //监听所有广播
+    // eventBus.on().listen((event) {
+    //   print(event);
+    //   this._attrBottomSheet();
+    // });
 
-            "title":"xl",
-            "checked":false
-          },
-          {
+    this.actionEventBus = eventBus.on<ProductContentEvent>().listen((str) {
+      print(str);
+      this._attrBottomSheet();
+    });
+  }
 
-            "title":"xxxl",
-            "checked":true
-          },
-        ]
-      },
-      {
-       "cate":"颜色",
-       list":[{
-
-            "title":"黑色",
-            "checked":false
-          },
-          {
-
-            "title":"白色",
-            "checked":true
-          },
-        ]
-      }
-  ]    
-   */
+  //销毁
+  void dispose() {
+    super.dispose();
+    this.actionEventBus.cancel(); //取消事件监听
   }
 
   //初始化Attr 格式化数据
@@ -110,6 +100,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
     });
     _getSelectedAttrValue();
   }
+
   //获取选中的值
   _getSelectedAttrValue() {
     var _list = this._attr;
@@ -124,6 +115,9 @@ class _ProductContentFirstState extends State<ProductContentFirst>
     // print(tempArr.join(','));
     setState(() {
       this._selectedValue = tempArr.join(',');
+      //给筛选属性赋值
+      this._productContent.selectedAttr=this._selectedValue;
+
     });
   }
 
@@ -195,7 +189,28 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                         children: <Widget>[
                           Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: _getAttrWidget(setBottomState))
+                              children: _getAttrWidget(setBottomState)),
+
+                          Divider(),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            height: ScreenAdapter.height(80),
+                            child: InkWell(
+                              onTap: () {
+                                _attrBottomSheet();
+                              },
+                              child: Row(
+                                children: <Widget>[
+                                  Text("数量: ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+
+                                  SizedBox(width: 10),
+                                  CartNum(this._productContent)
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -212,8 +227,11 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                               child: JdButton(
                                 color: Color.fromRGBO(253, 1, 0, 0.9),
                                 text: "加入购物车",
-                                cb: () {
-                                  print('加入购物车');
+                                cb: () {                               
+
+                                  CartServices.addCart(this._productContent);
+                                  //关闭底部筛选属性
+                                  Navigator.of(context).pop();
                                 },
                               ),
                             ),

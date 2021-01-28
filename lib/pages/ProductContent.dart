@@ -13,6 +13,9 @@ import '../model/ProductContentModel.dart';
 
 import '../widget/LoadingWidget.dart';
 
+//广播
+import '../services/EventBus.dart';
+
 class ProductContentPage extends StatefulWidget {
   final Map arguments;
   ProductContentPage({Key key, this.arguments}) : super(key: key);
@@ -158,7 +161,13 @@ class _ProductContentPageState extends State<ProductContentPage> {
                         color:Color.fromRGBO(253, 1, 0, 0.9),
                         text: "加入购物车",
                         cb: (){
-                          print('加入购物车');
+                          if(this._productContentList[0].attr.length>0){
+                              //广播 弹出筛选
+                              eventBus.fire(new ProductContentEvent('加入购物车'));
+
+                          }else{
+                            print("加入购物车操作");
+                          }
                         },
                       ),
                     ),
@@ -168,7 +177,12 @@ class _ProductContentPageState extends State<ProductContentPage> {
                         color: Color.fromRGBO(255, 165, 0, 0.9),
                         text: "立即购买",
                         cb: (){
-                          print('立即购买');
+                          if(this._productContentList[0].attr.length>0){
+                              //广播 弹出筛选
+                              eventBus.fire(new ProductContentEvent('立即购买'));
+                          }else{
+                              print("立即购买");
+                          }
                         },
                       ),
                     )

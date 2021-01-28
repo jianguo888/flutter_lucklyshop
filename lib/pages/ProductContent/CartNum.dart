@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_jdshop/services/ScreenAdapter.dart';
+import '../../model/ProductContentModel.dart';
 
 class CartNum extends StatefulWidget {
-  CartNum({Key key}) : super(key: key);
+  ProductContentitem _productContent;
+  
+  CartNum(this._productContent,{Key key}) : super(key: key);
 
   _CartNumState createState() => _CartNumState();
 }
 
 class _CartNumState extends State<CartNum> {
+  ProductContentitem _productContent;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this._productContent=widget._productContent;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +40,13 @@ class _CartNumState extends State<CartNum> {
 
   Widget _leftBtn() {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if( this._productContent.count>1){
+          setState(() {
+            this._productContent.count=this._productContent.count-1; 
+          });
+        }
+      },
       child: Container(
         alignment: Alignment.center,
         width: ScreenAdapter.width(45),
@@ -44,7 +61,9 @@ class _CartNumState extends State<CartNum> {
     return InkWell(
       onTap: (){
 
-
+          setState(() {
+            this._productContent.count=this._productContent.count+1; 
+          });
       },
       child: Container(
         alignment: Alignment.center,
@@ -66,7 +85,7 @@ class _CartNumState extends State<CartNum> {
         right: BorderSide(width: 1, color: Colors.black12),
       )),
       height: ScreenAdapter.height(45),
-      child: Text("1"),
+      child: Text("${this._productContent.count}"),
     );
   }
 }

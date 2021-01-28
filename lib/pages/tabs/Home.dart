@@ -161,9 +161,8 @@ class _HomePageState extends State<HomePage>
 
           return InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/productContent',arguments: {
-                "id":value.sId
-              });
+              Navigator.pushNamed(context, '/productContent',
+                  arguments: {"id": value.sId});
             },
             child: Container(
               padding: EdgeInsets.all(10),
@@ -228,16 +227,49 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
 
-    return ListView(
-      children: <Widget>[
-        _swiperWidget(),
-        SizedBox(height: ScreenAdapter.height(20)),
-        _titleWidget("猜你喜欢"),
-        SizedBox(height: ScreenAdapter.height(20)),
-        _hotProductListWidget(),
-        _titleWidget("热门推荐"),
-        _recProductListWidget()
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.center_focus_weak, size: 28, color: Colors.black87),
+          onPressed: null,
+        ),
+        title: InkWell(
+          child: Container(
+            height: ScreenAdapter.height(68),
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(233, 233, 233, 0.8),
+                borderRadius: BorderRadius.circular(30)),
+            padding: EdgeInsets.only(left: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Icon(Icons.search),
+                Text("笔记本", style: TextStyle(fontSize: ScreenAdapter.size(28)))
+              ],
+            ),
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, '/search');
+          },
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.message, size: 28, color: Colors.black87),
+            onPressed: null,
+          )
+        ],
+      ),
+      body: ListView(
+        children: <Widget>[
+          _swiperWidget(),
+          SizedBox(height: ScreenAdapter.height(20)),
+          _titleWidget("猜你喜欢"),
+          SizedBox(height: ScreenAdapter.height(20)),
+          _hotProductListWidget(),
+          _titleWidget("热门推荐"),
+          _recProductListWidget()
+        ],
+      ),
     );
   }
 }
