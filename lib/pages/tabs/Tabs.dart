@@ -54,7 +54,7 @@ class _TabsState extends State<Tabs> {
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.red,
         items: [
-            BottomNavigationBarItem(
+          BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label:"首页"           
             ),

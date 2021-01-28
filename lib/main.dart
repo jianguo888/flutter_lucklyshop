@@ -18,13 +18,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
+      providers: [             
         /*
-         provider3.x的配置方法         
+         provider3.x的配置方法          
           ChangeNotifierProvider(builder: (_) => Cart())   
         */ 
         //provider4.x的配置方法        
-        ChangeNotifierProvider(create: (_) => Cart())      
+        ChangeNotifierProvider(create: (_) => Cart())         
       ],
       child: MaterialApp(
         // home: Tabs(),

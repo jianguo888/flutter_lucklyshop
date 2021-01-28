@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_jdshop/services/ScreenAdapter.dart';
+import '../../services/ScreenAdapter.dart';
 import '../../model/ProductContentModel.dart';
 
 class CartNum extends StatefulWidget {
@@ -23,9 +23,9 @@ class _CartNumState extends State<CartNum> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenAdapter.width(164),
+      width: ScreenAdapter.width(168),
       decoration:
-          BoxDecoration(border: Border.all(width: 1, color: Colors.black12)),
+          BoxDecoration(border: Border.all(width: ScreenAdapter.width(2), color: Colors.black12)),
       child: Row(
         children: <Widget>[
           _leftBtn(),
@@ -81,8 +81,8 @@ class _CartNumState extends State<CartNum> {
       width: ScreenAdapter.width(70),
       decoration: BoxDecoration(
           border: Border(
-        left: BorderSide(width: 1, color: Colors.black12),
-        right: BorderSide(width: 1, color: Colors.black12),
+        left: BorderSide(width: ScreenAdapter.width(2), color: Colors.black12),
+        right: BorderSide(width: ScreenAdapter.width(2), color: Colors.black12),
       )),
       height: ScreenAdapter.height(45),
       child: Text("${this._productContent.count}"),

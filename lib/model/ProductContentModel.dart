@@ -20,7 +20,7 @@ class ProductContentitem {
   String sId;
   String title;
   String cid;
-  Object price;
+  Object price;   //注意
   String oldPrice;
   Object isBest;
   Object isHot;

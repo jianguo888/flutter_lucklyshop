@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_jdshop/services/CartServices.dart';
-import 'package:flutter_jdshop/services/ScreenAdapter.dart';
-import 'package:flutter_jdshop/widget/JdButton.dart';
-
+import '../../services/CartServices.dart';
+import '../../services/ScreenAdapter.dart';
+import '../../widget/JdButton.dart';
 import '../../model/ProductContentModel.dart';
 import '../ProductContent/CartNum.dart';
-
 import '../../config/Config.dart';
+import 'package:provider/provider.dart';
+import '../../provider/Cart.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+
 
 
 //广播
@@ -32,23 +35,18 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
   var actionEventBus;
 
+  var cartProvider;
+
   @override
   void initState() {
+
+    // print('aaaaaaaaaaaaaaaa---');
     super.initState();
     this._productContent = widget._productContentList[0];
 
     this._attr = this._productContent.attr;
 
     _initAttr();
-
-
-
-    //监听广播
-    //监听所有广播
-    // eventBus.on().listen((event) {
-    //   print(event);
-    //   this._attrBottomSheet();
-    // });
 
     this.actionEventBus = eventBus.on<ProductContentEvent>().listen((str) {
       print(str);
@@ -66,6 +64,9 @@ class _ProductContentFirstState extends State<ProductContentFirst>
   _initAttr() {
     var attr = this._attr;
     for (var i = 0; i < attr.length; i++) {
+
+      attr[i].attrList.clear();   //清空数组里面的数据
+
       for (var j = 0; j < attr[i].list.length; j++) {
         if (j == 0) {
           attr[i].attrList.add({"title": attr[i].list[j], "checked": true});
@@ -132,7 +133,9 @@ class _ProductContentFirstState extends State<ProductContentFirst>
             _changeAttr(attrItem.cate, item["title"], setBottomState);
           },
           child: Chip(
-            label: Text("${item["title"]}"),
+            label: Text("${item["title"]}",style: TextStyle(
+              color:  item["checked"] ? Colors.white : Colors.black54
+            )),
             padding: EdgeInsets.all(10),
             backgroundColor: item["checked"] ? Colors.red : Colors.black26,
           ),
@@ -176,9 +179,10 @@ class _ProductContentFirstState extends State<ProductContentFirst>
         builder: (contex) {
           return StatefulBuilder(
             builder: (BuildContext context, setBottomState) {
-              return GestureDetector(
-                //解决showModalBottomSheet点击消失的问题
-                onTap: () {
+              return GestureDetector(                 
+                behavior:HitTestBehavior.opaque , 
+                 //解决showModalBottomSheet点击消失的问题             
+                onTap: () {   
                   return false;
                 },
                 child: Stack(
@@ -195,11 +199,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                           Container(
                             margin: EdgeInsets.only(top: 10),
                             height: ScreenAdapter.height(80),
-                            child: InkWell(
-                              onTap: () {
-                                _attrBottomSheet();
-                              },
-                              child: Row(
+                            child:  Row(
                                 children: <Widget>[
                                   Text("数量: ",
                                       style: TextStyle(
@@ -208,8 +208,7 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                                   SizedBox(width: 10),
                                   CartNum(this._productContent)
                                 ],
-                              ),
-                            ),
+                              ),                          
                           )
                         ],
                       ),
@@ -227,11 +226,15 @@ class _ProductContentFirstState extends State<ProductContentFirst>
                               child: JdButton(
                                 color: Color.fromRGBO(253, 1, 0, 0.9),
                                 text: "加入购物车",
-                                cb: () {                               
+                                cb: () async{                               
 
-                                  CartServices.addCart(this._productContent);
+                                 await CartServices.addCart(this._productContent);
                                   //关闭底部筛选属性
                                   Navigator.of(context).pop();
+                                  //调用Provider 更新数据
+                                  this.cartProvider.updateCartList();
+                                  Fluttertoast.showToast( msg: '加入购物车成功', toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.CENTER,);
+
                                 },
                               ),
                             ),
@@ -261,6 +264,10 @@ class _ProductContentFirstState extends State<ProductContentFirst>
 
   @override
   Widget build(BuildContext context) {
+
+    this.cartProvider = Provider.of<Cart>(context);
+
+
     //处理图片
     String pic = Config.domain + this._productContent.pic;
     pic = pic.replaceAll('\\', '/');
