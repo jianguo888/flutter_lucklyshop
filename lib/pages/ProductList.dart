@@ -325,7 +325,7 @@ class _ProductListPageState extends State<ProductListPage> {
   }
   @override
   Widget build(BuildContext context) {
-    // ScreenAdapter.init(context);
+    ScreenAdapter.init(context);
 
     return Scaffold(
         key: _scaffoldKey,

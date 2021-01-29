@@ -1,27 +1,35 @@
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+class ScreenAdapter{
 
-class ScreenAdapter {
-  static height(double value) {
-    return ScreenUtil().setHeight(value);
+  static init(context){
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+  }
+  static height(double value){
+     return ScreenUtil.getInstance().setHeight(value);
+  }
+  static width(double value){
+      return ScreenUtil.getInstance().setWidth(value);
+  }
+  static getScreenHeight(){
+    return ScreenUtil.screenHeightDp;
+  }
+  static getScreenWidth(){
+    return ScreenUtil.screenWidthDp;
   }
 
-  static width(double value) {
-    return ScreenUtil().setWidth(value);
+  static getScreenPxHeight(){
+    return ScreenUtil.screenHeight;
+  }
+  static getScreenPxWidth(){
+    return ScreenUtil.screenWidth;
   }
 
-  static getScreenHeight() {
-    //屏幕的高度  物理高度
-    return ScreenUtil().screenHeight;
+  static size(double value){
+   return ScreenUtil.getInstance().setSp(value);  
   }
 
-  static getScreenWidth() {
-    //屏幕的宽度  物理宽度
-    return ScreenUtil().screenWidth;
-  }
-
-  static size(double value) {
-    return ScreenUtil().setSp(value);
-  }
+  // ScreenUtil.screenHeight 
 }
 
 // ScreenAdaper

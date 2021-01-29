@@ -13,7 +13,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  bool _isEdit = false;
+
+  bool _isEdit=false;
   @override
   void initState() {
     super.initState();
@@ -22,6 +23,8 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenAdapter.init(context);
+
     var cartProvider = Provider.of<Cart>(context);
 
     return Scaffold(
@@ -30,9 +33,9 @@ class _CartPageState extends State<CartPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.launch),
-            onPressed: () {
+            onPressed: (){
               setState(() {
-                this._isEdit = !this._isEdit;
+                  this._isEdit=!this._isEdit;
               });
             },
           )
@@ -74,6 +77,7 @@ class _CartPageState extends State<CartPage> {
                                   value: cartProvider.isCheckedAll,
                                   activeColor: Colors.pink,
                                   onChanged: (val) {
+
                                     //实现全选或者反选
                                     cartProvider.checkAll(val);
                                   },
@@ -81,36 +85,34 @@ class _CartPageState extends State<CartPage> {
                               ),
                               Text("全选"),
                               SizedBox(width: 20),
-                              this._isEdit == false ? Text("合计:") : Text(""),
-                              this._isEdit == false
-                                  ? Text("${cartProvider.allPrice}",
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.red))
-                                  : Text(""),
+                              this._isEdit==false?Text("合计:"):Text(""),
+                              this._isEdit==false?Text("${cartProvider.allPrice}",style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.red
+                              )):Text(""),
+
                             ],
                           ),
                         ),
-                        this._isEdit == false
-                            ? Align(
-                                alignment: Alignment.centerRight,
-                                child: RaisedButton(
-                                  child: Text("结算",
-                                      style: TextStyle(color: Colors.white)),
-                                  color: Colors.red,
-                                  onPressed: () {},
-                                ),
-                              )
-                            : Align(
-                                alignment: Alignment.centerRight,
-                                child: RaisedButton(
-                                  child: Text("删除",
-                                      style: TextStyle(color: Colors.white)),
-                                  color: Colors.red,
-                                  onPressed: () {
-                                    cartProvider.removeItem();
-                                  },
-                                ),
-                              )
+                        this._isEdit==false?Align(
+                          alignment: Alignment.centerRight,
+                          child: RaisedButton(
+                            child: Text("结算",
+                                style: TextStyle(color: Colors.white)),
+                            color: Colors.red,
+                            onPressed: () {},
+                          ),
+                        ):Align(
+                          alignment: Alignment.centerRight,
+                          child: RaisedButton(
+                            child: Text("删除",
+                                style: TextStyle(color: Colors.white)),
+                            color: Colors.red,
+                            onPressed: () {
+                                cartProvider.removeItem();
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),

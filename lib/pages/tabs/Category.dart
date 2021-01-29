@@ -150,7 +150,7 @@ class _CategoryPageState extends State<CategoryPage>
   @override
   Widget build(BuildContext context) {
     //注意用ScreenAdapter必须得在build方法里面初始化
-    // ScreenAdapter.init(context);
+    ScreenAdapter.init(context);
 
     //左侧宽度
     var leftWidth = ScreenAdapter.getScreenWidth() / 4;
