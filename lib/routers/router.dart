@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../pages/tabs/Tabs.dart';
 
 import '../pages/Search.dart';
@@ -9,13 +10,25 @@ import '../pages/ProductContent.dart';
 
 import '../pages/tabs/Cart.dart';
 
+import '../pages/Login.dart';
+
+import '../pages/RegisterFirst.dart';
+import '../pages/RegisterSecond.dart';
+import '../pages/RegisterThird.dart';
+
 //配置路由
 final routes = {
   '/': (context) => Tabs(),
   '/search': (context) => SearchPage(),
   '/cart': (context) => CartPage(),
-  '/productList': (context,{arguments}) => ProductListPage(arguments:arguments),
-  '/productContent': (context,{arguments}) => ProductContentPage(arguments:arguments),
+  '/login': (context) => LoginPage(),
+  '/registerFirst': (context) => RegisterFirstPage(),
+  '/registerSecond': (context) => RegisterSecondPage(),
+  '/registerThird': (context) => RegisterThirdPage(),
+  '/productList': (context, {arguments}) =>
+      ProductListPage(arguments: arguments),
+  '/productContent': (context, {arguments}) =>
+      ProductContentPage(arguments: arguments),
 };
 
 //固定写法
