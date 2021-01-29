@@ -6,7 +6,6 @@ import 'Category.dart';
 import 'Cart.dart';
 import 'User.dart';
 
-
 class Tabs extends StatefulWidget {
   Tabs({Key key}) : super(key: key);
 
@@ -26,8 +25,7 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
-
-    ScreenAdapter.init(context);
+    // ScreenAdapter.init(context);
 
     return Scaffold(
       // appBar: _currentIndex!=3?:AppBar(
@@ -54,22 +52,11 @@ class _TabsState extends State<Tabs> {
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.red,
         items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "首页"),
+          BottomNavigationBarItem(icon: Icon(Icons.category), label: "分类"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label:"首页"           
-            ),
-             BottomNavigationBarItem(
-              icon: Icon(Icons.category),
-              label:"分类"             
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-               label:"购物车"            
-            ),            
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              label:"我的"
-            )
+              icon: Icon(Icons.shopping_cart), label: "购物车"),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: "我的")
         ],
       ),
     );
