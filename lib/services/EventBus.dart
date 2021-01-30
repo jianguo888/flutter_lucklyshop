@@ -21,4 +21,21 @@ class UserEvent{
   }
 }
 
+//收货地址广播
+class AddressEvent{
+  String str;
+  AddressEvent(String str){
+    this.str=str;
+  }
+}
+
+//结算页面
+class CheckOutEvent{
+  String str;
+  CheckOutEvent(String str){
+    this.str=str;
+  }
+}
+
+
 

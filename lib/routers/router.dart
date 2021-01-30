@@ -21,6 +21,10 @@ import '../pages/CheckOut.dart';
 import '../pages/Address/AddressAdd.dart';
 import '../pages/Address/AddressEdit.dart';
 import '../pages/Address/AddressList.dart';
+import '../pages/Pay.dart';
+
+import '../pages/Order.dart';
+import '../pages/OrderInfo.dart';
 
 //配置路由
 final routes = {
@@ -37,8 +41,11 @@ final routes = {
       ProductContentPage(arguments: arguments),
   '/checkOut': (context) => CheckOutPage(),
   '/addressAdd': (context) => AddressAddPage(),
-  '/addressEdit': (context) => AddressEditPage(),
+  '/addressEdit': (context,{arguments}) => AddressEditPage(arguments: arguments),
   '/addressList': (context) => AddressListPage(),
+  '/pay': (context) => PayPage(),
+  '/order': (context) => OrderPage(),
+  '/orderinfo': (context) => OrderInfoPage(),
 };
 
 //固定写法

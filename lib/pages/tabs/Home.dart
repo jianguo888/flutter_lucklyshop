@@ -5,6 +5,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import '../../services/ScreenAdapter.dart';
 import '../../config/Config.dart';
 import 'package:dio/dio.dart';
+// import '../../services/SignServices.dart';
+
 
 //轮播图类模型
 import '../../model/FocusModel.dart';
@@ -31,6 +33,7 @@ class _HomePageState extends State<HomePage>
     _getFocusData();
     _getHotProductData();
     _getBestProductData();
+    // SignServices.getSign();
   }
 
   //获取轮播图数据

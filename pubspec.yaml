@@ -41,6 +41,8 @@ dependencies:
   city_pickers: ^0.2.0
 #事件广播
   event_bus: ^1.1.1
+  #签名验证
+  crypto: ^2.1.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
