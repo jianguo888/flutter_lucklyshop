@@ -70,7 +70,7 @@ class _SearchPageState extends State<SearchPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            child: Text("历史记录", style: Theme.of(context).textTheme.headline6),
+            child: Text("历史记录", style: Theme.of(context).textTheme.title),
           ),
           Divider(),
           Column(
@@ -160,7 +160,7 @@ class _SearchPageState extends State<SearchPage> {
           child: ListView(
             children: <Widget>[
               Container(
-                child: Text("热搜", style: Theme.of(context).textTheme.headline6),
+                child: Text("热搜", style: Theme.of(context).textTheme.title),
               ),
               Divider(),
               Wrap(

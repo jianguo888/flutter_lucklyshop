@@ -3,6 +3,14 @@ import '../services/ScreenAdapter.dart';
 import '../widget/JdText.dart';
 import '../widget/JdButton.dart';
 
+import '../config/Config.dart';
+import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../services/Storage.dart';
+import 'dart:convert';
+
+import '../services/EventBus.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -10,6 +18,51 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  //监听登录页面销毁的事件
+  dispose(){
+    super.dispose();
+    eventBus.fire(new UserEvent('登录成功...'));
+  }
+
+  String username='';
+  String password='';
+  doLogin() async{
+    RegExp reg = new RegExp(r"^1\d{10}$");
+    if (!reg.hasMatch(this.username)) {
+       Fluttertoast.showToast(
+        msg: '手机号格式不对',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    } else if(password.length<6){
+      Fluttertoast.showToast(
+        msg: '密码不正确',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }else{
+      var api = '${Config.domain}api/doLogin';
+      var response = await Dio().post(api, data: {"username": this.username,"password":this.password});
+      if (response.data["success"]) {
+        print(response.data);
+        //保存用户信息
+        Storage.setString('userInfo', json.encode(response.data["userinfo"]));
+
+        Navigator.pop(context);
+        
+      } else {
+        Fluttertoast.showToast(
+          msg: '${response.data["message"]}',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+        );
+      }
+
+    }
+   
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,17 +90,18 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.only(top: 30),
                 height: ScreenAdapter.width(160),
                 width: ScreenAdapter.width(160),
-                // child: Image.asset('images/login.png'),
-                child: Image.network(
-                    'https://www.itying.com/images/flutter/list5.jpg',
-                    fit: BoxFit.cover),
+                child: Image.asset('images/login.png',fit: BoxFit.cover),
+                // child: Image.network(
+                //     'https://www.itying.com/images/flutter/list5.jpg',
+                //     fit: BoxFit.cover),
               ),
             ),
             SizedBox(height: 30),
             JdText(
               text: "请输入用户名",
               onChanged: (value) {
-                print(value);
+                // print(value);
+                this.username=value;
               },
             ),
             SizedBox(height: 10),
@@ -55,7 +109,8 @@ class _LoginPageState extends State<LoginPage> {
               text: "请输入密码",
               password: true,
               onChanged: (value) {
-                print(value);
+                // print(value);
+                this.password=value;
               },
             ),
 
@@ -87,9 +142,7 @@ class _LoginPageState extends State<LoginPage> {
               text:"登录",
               color: Colors.red,
               height: 74,
-              cb: (){
-
-              },
+              cb: doLogin,
             )
           ],
         ),
