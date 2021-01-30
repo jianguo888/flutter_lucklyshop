@@ -1,3 +1,3 @@
 class Config{
-  static String domain="https://jd.itying.com/";
+  static String domain="http://jd.itying.com/";
 }

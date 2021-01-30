@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jdshop/widget/JdButton.dart';
 import '../../services/ScreenAdapter.dart';
+
 import '../../services/UserServices.dart';
+
 import '../../services/EventBus.dart';
 
 class UserPage extends StatefulWidget {
@@ -32,6 +34,7 @@ class _UserPageState extends State<UserPage> {
   _getUserinfo() async {
     var isLogin = await UserServices.getUserLoginState();
     var userInfo = await UserServices.getUserInfo();
+
     setState(() {
       this.userInfo = userInfo;
       this.isLogin = isLogin;

@@ -6,6 +6,8 @@ import 'routers/router.dart';
 import 'package:provider/provider.dart';
 import 'provider/Cart.dart';
 
+import 'provider/CheckOut.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -19,13 +21,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        /*
-         provider3.x的配置方法          
-          ChangeNotifierProvider(builder: (_) => Cart())   
-        */
+          /*
+         provider3.x的配置方法
+            ChangeNotifierProvider(builder: (_) => Cart()),
+            ChangeNotifierProvider(builder: (_) => CheckOut())   
+        */ 
 
-        //provider4.x的配置方
-        ChangeNotifierProvider(create: (_) => Cart())
+        //provider4.x的配置方法         
+        ChangeNotifierProvider(create: (_) => Cart()),
+        ChangeNotifierProvider(create: (_) => CheckOut())             
       ],
       child: MaterialApp(
         // home: Tabs(),

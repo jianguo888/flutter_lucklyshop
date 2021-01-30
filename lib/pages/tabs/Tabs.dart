@@ -14,7 +14,7 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-  int _currentIndex = 3;
+  int _currentIndex = 0;
   PageController _pageController;
   @override
   void initState() {
@@ -54,22 +54,12 @@ class _TabsState extends State<Tabs> {
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.red,
         items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("首页")),
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label:"首页"           
-            ),
-             BottomNavigationBarItem(
-              icon: Icon(Icons.category),
-              label:"分类"             
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-               label:"购物车"            
-            ),            
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              label:"我的"
-            )
+              icon: Icon(Icons.category), title: Text("分类")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart), title: Text("购物车")),
+          BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("我的"))
         ],
       ),
     );

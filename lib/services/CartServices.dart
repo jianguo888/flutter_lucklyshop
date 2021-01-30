@@ -2,15 +2,12 @@ import 'dart:convert';
 import 'Storage.dart';
 import '../config/Config.dart';
 
-class CartServices{
-
-  
-  static addCart(item) async{
+class CartServices {
+  static addCart(item) async {
     //把对象转换成Map类型的数据
-    item=CartServices.formatCartData(item);
+    item = CartServices.formatCartData(item);
 
-
-      /*
+    /*
       1、获取本地存储的cartList数据
       2、判断cartList是否有数据
             有数据：
@@ -50,41 +47,36 @@ class CartServices{
     
       */
 
+    try {
+      List cartListData = json.decode(await Storage.getString('cartList'));
 
-      try {
-        List cartListData = json.decode(await Storage.getString('cartList'));
+      //判断购物车有没有当前数据
+      bool hasData = cartListData.any((value) {
+        return value['_id'] == item['_id'] &&
+            value['selectedAttr'] == item['selectedAttr'];
+      });
 
-        //判断购物车有没有当前数据
-        bool hasData=cartListData.any((value){         
-          return value['_id']==item['_id']&&value['selectedAttr']==item['selectedAttr'];
-        });
-
-        if(hasData){
-          for(var i=0;i<cartListData.length;i++){
-            if(cartListData[i]['_id']==item['_id']&&cartListData[i]['selectedAttr']==item['selectedAttr']){
-
-                cartListData[i]["count"]=cartListData[i]["count"]+1;
-            }
+      if (hasData) {
+        for (var i = 0; i < cartListData.length; i++) {
+          if (cartListData[i]['_id'] == item['_id'] &&
+              cartListData[i]['selectedAttr'] == item['selectedAttr']) {
+            cartListData[i]["count"] = cartListData[i]["count"] + 1;
           }
-          await Storage.setString('cartList', json.encode(cartListData));
-
-        }else{
-          cartListData.add(item);
-          await Storage.setString('cartList', json.encode(cartListData));
         }
-
-
-      } catch (e) {
-          List tempList=[];
-          tempList.add(item);
-          await Storage.setString('cartList', json.encode(tempList));
+        await Storage.setString('cartList', json.encode(cartListData));
+      } else {
+        cartListData.add(item);
+        await Storage.setString('cartList', json.encode(cartListData));
       }
-  
-    
+    } catch (e) {
+      List tempList = [];
+      tempList.add(item);
+      await Storage.setString('cartList', json.encode(tempList));
+    }
   }
 
   //过滤数据
-  static formatCartData(item){
+  static formatCartData(item) {
     //处理图片
     String pic = item.pic;
     pic = Config.domain + pic.replaceAll('\\', '/');
@@ -93,18 +85,34 @@ class CartServices{
     data['_id'] = item.sId;
     data['title'] = item.title;
     //处理 string 和int类型的价格
-    if(item.price is int || item.price is double){
-        data['price'] = item.price;
-    }else{
-        data['price'] = double.parse(item.price);
-    }   
+    if (item.price is int || item.price is double) {
+      data['price'] = item.price;
+    } else {
+      data['price'] = double.parse(item.price);
+    }
     data['selectedAttr'] = item.selectedAttr;
     data['count'] = item.count;
     data['pic'] = pic;
     //是否选中
-    data['checked'] = true;    
+    data['checked'] = true;
     return data;
   }
 
+  //获取购物车选中的数据
+  static getCheckOutData() async {
+    List cartListData = [];
+    List tempCheckOutData = [];
+    try {
+      cartListData = json.decode(await Storage.getString('cartList'));
+    } catch (e) {
+      cartListData = [];
+    }
+    for (var i = 0; i < cartListData.length; i++) {
+      if (cartListData[i]["checked"] == true) {
+        tempCheckOutData.add(cartListData[i]);
+      }
+    }
 
+    return tempCheckOutData;
+  }
 }

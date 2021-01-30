@@ -38,6 +38,7 @@ dependencies:
 #注意自定版本安装 flutter_screenutil
   flutter_screenutil: 0.5.3
   fluttertoast: ^7.1.6
+  city_pickers: ^0.2.0
 #事件广播
   event_bus: ^1.1.1
 dev_dependencies:
