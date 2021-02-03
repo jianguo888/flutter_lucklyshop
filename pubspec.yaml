@@ -24,7 +24,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   flutter:
     sdk: flutter
-  # flutter_screenutil: ^4.0.2+5
+   
   dio: ^3.0.10
 
   # The following adds the Cupertino Icons font to your application.
@@ -36,7 +36,8 @@ dependencies:
   #官方状态管理
   provider: ^4.3.3
 #注意自定版本安装 flutter_screenutil
-  flutter_screenutil: 0.5.3
+  # flutter_screenutil: 0.5.3
+  flutter_screenutil: ^4.0.2+8
   fluttertoast: ^7.1.6
   city_pickers: ^0.2.0
 #事件广播

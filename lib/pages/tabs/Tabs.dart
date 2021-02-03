@@ -6,7 +6,6 @@ import 'Category.dart';
 import 'Cart.dart';
 import 'User.dart';
 
-
 class Tabs extends StatefulWidget {
   Tabs({Key key}) : super(key: key);
 
@@ -26,8 +25,7 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
-
-    ScreenAdapter.init(context);
+    // ScreenAdapter.init(context);
 
     return Scaffold(
       // appBar: _currentIndex!=3?:AppBar(

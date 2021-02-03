@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil_init.dart';
 
 import 'routers/router.dart';
 
@@ -20,26 +21,29 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
+        providers: [
           /*
          provider3.x的配置方法
             ChangeNotifierProvider(builder: (_) => Cart()),
             ChangeNotifierProvider(builder: (_) => CheckOut())   
-        */ 
+        */
 
-        //provider4.x的配置方法         
-        ChangeNotifierProvider(create: (_) => Cart()),
-        ChangeNotifierProvider(create: (_) => CheckOut())             
-      ],
-      child: MaterialApp(
-        // home: Tabs(),
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        onGenerateRoute: onGenerateRoute,
-        theme: ThemeData(
-            // primaryColor: Colors.yellow
-            primaryColor: Colors.white),
-      ),
-    );
+          //provider4.x的配置方法
+          ChangeNotifierProvider(create: (_) => Cart()),
+          ChangeNotifierProvider(create: (_) => CheckOut())
+        ],
+        child: ScreenUtilInit(
+          designSize: Size(750, 1334),
+          allowFontScaling: false,
+          child: MaterialApp(
+            // home: Tabs(),
+            debugShowCheckedModeBanner: false,
+            initialRoute: '/',
+            onGenerateRoute: onGenerateRoute,
+            theme: ThemeData(
+                // primaryColor: Colors.yellow
+                primaryColor: Colors.white),
+          ),
+        ));
   }
 }

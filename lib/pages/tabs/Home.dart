@@ -7,7 +7,6 @@ import '../../config/Config.dart';
 import 'package:dio/dio.dart';
 // import '../../services/SignServices.dart';
 
-
 //轮播图类模型
 import '../../model/FocusModel.dart';
 
@@ -228,7 +227,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    ScreenAdapter.init(context);
+    // ScreenAdapter.init(context);
 
     return Scaffold(
       appBar: AppBar(
