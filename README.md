@@ -1,16 +1,32 @@
 # flutter_lucklyshop
 
-A new Flutter application.
+Flutter仿京东购物app，根据教程1：1打造
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+使用：
 
-A few resources to get you started if this is your first Flutter project:
+```
+git clone git@github.com:ITmxs/flutter_lucklyshop.git
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+然后拉取第三方插件
+
+```
+flutter pub get
+
+
+```
+
+最后
+
+```
+flutter run
+```
+
+此教程就是教大家如何布局，以及数据交互、
+
+其中用到的插件也较多，可以起到很好的学习作用，接口来自课程
+

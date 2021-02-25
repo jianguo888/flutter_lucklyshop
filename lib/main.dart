@@ -1,13 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
-
-import 'routers/router.dart';
-
 // 引入provider
 import 'package:provider/provider.dart';
-import 'provider/Cart.dart';
 
+import 'provider/Cart.dart';
 import 'provider/CheckOut.dart';
+import 'routers/router.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,6 +21,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    if (Platform.isAndroid) {
+      SystemUiOverlayStyle systemUiOverlayStyle =
+          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    }
     return MultiProvider(
         providers: [
           /*
@@ -37,7 +43,7 @@ class _MyAppState extends State<MyApp> {
           allowFontScaling: false,
           child: MaterialApp(
             // home: Tabs(),
-            debugShowCheckedModeBanner: false,
+            debugShowCheckedModeBanner: false, //去除右上角debug图标
             initialRoute: '/',
             onGenerateRoute: onGenerateRoute,
             theme: ThemeData(
