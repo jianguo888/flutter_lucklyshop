@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../pages/Cart/CartNum.dart';
-import '../../services/ScreenAdapter.dart';
 import 'package:provider/provider.dart';
+
+import '../../pages/Cart/CartNum.dart';
 import '../../provider/Cart.dart';
+import '../../services/ScreenAdapter.dart';
 
 class CartItem extends StatefulWidget {
   Map _itemData;

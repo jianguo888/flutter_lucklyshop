@@ -1,13 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import '../../services/ScreenAdapter.dart';
-
-import '../../services/UserServices.dart';
-import '../../services/SignServices.dart';
 
 import '../../config/Config.dart';
-import 'package:dio/dio.dart';
-
 import '../../services/EventBus.dart';
+import '../../services/ScreenAdapter.dart';
+import '../../services/SignServices.dart';
+import '../../services/UserServices.dart';
 
 class AddressListPage extends StatefulWidget {
   AddressListPage({Key key}) : super(key: key);

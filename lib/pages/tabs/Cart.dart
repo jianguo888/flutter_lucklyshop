@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_jdshop/services/CartServices.dart';
-import '../../services/ScreenAdapter.dart';
-import '../../services/UserServices.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+
 import '../../provider/Cart.dart';
 import '../../provider/CheckOut.dart';
+import '../../services/ScreenAdapter.dart';
+import '../../services/UserServices.dart';
 import '../Cart/CartItem.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class CartPage extends StatefulWidget {
   CartPage({Key key}) : super(key: key);

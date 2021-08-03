@@ -1,20 +1,15 @@
+import 'package:city_pickers/city_pickers.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jdshop/services/ScreenAdapter.dart';
 
-import '../../widget/JdText.dart';
-
-import '../../widget/JdButton.dart';
-
-import 'package:city_pickers/city_pickers.dart';
-
-import '../../services/UserServices.dart';
-import '../../services/SignServices.dart';
-
 import '../../config/Config.dart';
-import 'package:dio/dio.dart';
-
 import '../../services/EventBus.dart';
+import '../../services/SignServices.dart';
+import '../../services/UserServices.dart';
+import '../../widget/JdButton.dart';
+import '../../widget/JdText.dart';
 
 class AddressAddPage extends StatefulWidget {
   AddressAddPage({Key key}) : super(key: key);

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../services/ScreenAdapter.dart';
 
-import 'Home.dart';
-import 'Category.dart';
 import 'Cart.dart';
+import 'Category.dart';
+import 'Home.dart';
 import 'User.dart';
 
 class Tabs extends StatefulWidget {

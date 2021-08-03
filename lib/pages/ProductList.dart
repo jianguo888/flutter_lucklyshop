@@ -1,10 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../services/SearchServices.dart';
-import '../services/ScreenAdapter.dart';
+
 import '../config/Config.dart';
-import 'package:dio/dio.dart';
 import '../model/ProductModel.dart';
+import '../services/ScreenAdapter.dart';
+import '../services/SearchServices.dart';
 import '../widget/LoadingWidget.dart';
 
 class ProductListPage extends StatefulWidget {

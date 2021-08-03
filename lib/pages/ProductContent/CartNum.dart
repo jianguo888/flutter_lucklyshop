@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../services/ScreenAdapter.dart';
+
 import '../../model/ProductContentModel.dart';
+import '../../services/ScreenAdapter.dart';
 
 class CartNum extends StatefulWidget {
   ProductContentitem _productContent;

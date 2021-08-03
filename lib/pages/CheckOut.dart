@@ -1,18 +1,18 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import '../services/ScreenAdapter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import '../provider/CheckOut.dart';
-import '../provider/Cart.dart';
-import '../services/UserServices.dart';
-import '../services/SignServices.dart';
-import '../services/CheckOutServices.dart';
 
 import '../config/Config.dart';
-import 'package:dio/dio.dart';
-
+import '../provider/Cart.dart';
+import '../provider/CheckOut.dart';
+import '../services/CheckOutServices.dart';
 import '../services/EventBus.dart';
-import 'dart:convert';
-import 'package:fluttertoast/fluttertoast.dart';
+import '../services/ScreenAdapter.dart';
+import '../services/SignServices.dart';
+import '../services/UserServices.dart';
 
 class CheckOutPage extends StatefulWidget {
   CheckOutPage({Key key}) : super(key: key);

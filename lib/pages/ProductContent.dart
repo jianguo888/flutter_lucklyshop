@@ -1,26 +1,20 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+
+import '../config/Config.dart';
+import '../model/ProductContentModel.dart';
+import '../provider/Cart.dart';
+import '../services/CartServices.dart';
+import '../services/EventBus.dart';
 import '../services/ScreenAdapter.dart';
+import '../widget/JdButton.dart';
+import '../widget/LoadingWidget.dart';
 import 'ProductContent/ProductContentFirst.dart';
 import 'ProductContent/ProductContentSecond.dart';
 import 'ProductContent/ProductContentThird.dart';
-
-import '../widget/JdButton.dart';
-
-import '../config/Config.dart';
-import 'package:dio/dio.dart';
-import '../model/ProductContentModel.dart';
-
-import '../widget/LoadingWidget.dart';
-
-import 'package:provider/provider.dart';
-import '../provider/Cart.dart';
-import '../services/CartServices.dart';
-
-import 'package:fluttertoast/fluttertoast.dart';
-
-//广播
-import '../services/EventBus.dart';
 
 class ProductContentPage extends StatefulWidget {
   final Map arguments;

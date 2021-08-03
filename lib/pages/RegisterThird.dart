@@ -1,17 +1,15 @@
-import 'package:flutter/material.dart';
-import '../widget/JdText.dart';
-import '../widget/JdButton.dart';
-import '../services/ScreenAdapter.dart';
+import 'dart:convert';
 
-import '../config/Config.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../services/Storage.dart';
-import 'dart:convert';
-//引入Tabs
-
+import '../config/Config.dart';
 import '../pages/tabs/Tabs.dart';
+import '../services/ScreenAdapter.dart';
+import '../services/Storage.dart';
+import '../widget/JdButton.dart';
+import '../widget/JdText.dart';
 
 class RegisterThirdPage extends StatefulWidget {
   Map arguments;

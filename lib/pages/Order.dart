@@ -1,13 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jdshop/services/ScreenAdapter.dart';
+
 import '../config/Config.dart';
-import 'package:dio/dio.dart';
-
-//订单列表数据模型
 import '../model/OrderModel.dart';
-
-import '../services/UserServices.dart';
 import '../services/SignServices.dart';
+import '../services/UserServices.dart';
 
 class OrderPage extends StatefulWidget {
   OrderPage({Key key}) : super(key: key);

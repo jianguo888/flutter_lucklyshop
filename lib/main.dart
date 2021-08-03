@@ -1,16 +1,21 @@
-import 'dart:io';
+ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
-// 引入provider
 import 'package:provider/provider.dart';
 
 import 'provider/Cart.dart';
 import 'provider/CheckOut.dart';
 import 'routers/router.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+
+    // ColorFiltered(
+    // colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
+  MyApp()
+// )
+ );
 
 class MyApp extends StatefulWidget {
   MyApp({Key key}) : super(key: key);

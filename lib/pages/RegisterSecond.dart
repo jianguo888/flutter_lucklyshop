@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import '../widget/JdText.dart';
-import '../widget/JdButton.dart';
-import '../services/ScreenAdapter.dart';
-import 'dart:async'; //Timer定时器需要引入
-import '../config/Config.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../config/Config.dart';
+import '../services/ScreenAdapter.dart';
+import '../widget/JdButton.dart';
+import '../widget/JdText.dart';
 
 class RegisterSecondPage extends StatefulWidget {
   Map arguments;

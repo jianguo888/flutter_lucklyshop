@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import '../services/ScreenAdapter.dart';
-import '../widget/JdText.dart';
-import '../widget/JdButton.dart';
-
-import '../config/Config.dart';
-import 'package:dio/dio.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import '../services/Storage.dart';
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../config/Config.dart';
 import '../services/EventBus.dart';
+import '../services/ScreenAdapter.dart';
+import '../services/Storage.dart';
+import '../widget/JdButton.dart';
+import '../widget/JdText.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);

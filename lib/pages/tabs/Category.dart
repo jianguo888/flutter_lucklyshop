@@ -1,9 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/ScreenAdapter.dart';
 import '../../config/Config.dart';
-import 'package:dio/dio.dart';
 import '../../model/CateModel.dart';
+import '../../services/ScreenAdapter.dart';
 
 class CategoryPage extends StatefulWidget {
   CategoryPage({Key key}) : super(key: key);

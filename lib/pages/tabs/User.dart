@@ -2,11 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_jdshop/widget/JdButton.dart';
-import '../../services/ScreenAdapter.dart';
-
-import '../../services/UserServices.dart';
 
 import '../../services/EventBus.dart';
+import '../../services/ScreenAdapter.dart';
+import '../../services/UserServices.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key key}) : super(key: key);
@@ -102,19 +101,26 @@ class _UserPageState extends State<UserPage> {
         ListTile(
           leading: Icon(Icons.assignment, color: Colors.red),
           title: Text("全部订单"),
-          onTap: (){
+          onTap: () {
             Navigator.pushNamed(context, '/order');
           },
         ),
         Divider(),
         ListTile(
           leading: Icon(Icons.payment, color: Colors.green),
-          title: Text("待付款"),
+          title: Text("待付款可拖拽"),
+          onTap: (){
+            Navigator.pushNamed(context, '/dragWidragPage');
+
+          },
         ),
         Divider(),
         ListTile(
           leading: Icon(Icons.local_car_wash, color: Colors.orange),
           title: Text("待收货"),
+          onTap: () {
+            Navigator.pushNamed(context, '/commonwidget');
+          },
         ),
         Container(
             width: double.infinity,
@@ -123,11 +129,17 @@ class _UserPageState extends State<UserPage> {
         ListTile(
           leading: Icon(Icons.favorite, color: Colors.lightGreen),
           title: Text("我的收藏"),
+          onTap: () {
+            Navigator.pushNamed(context, '/srollcontroller');
+          },
         ),
         Divider(),
         ListTile(
           leading: Icon(Icons.people, color: Colors.black54),
           title: Text("在线客服"),
+          onTap: () {
+            Navigator.pushNamed(context, '/listview');
+          },
         ),
         Divider(),
         this.isLogin

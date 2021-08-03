@@ -1,14 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../model/ProductModel.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../../services/ScreenAdapter.dart';
-import '../../config/Config.dart';
-import 'package:dio/dio.dart';
-// import '../../services/SignServices.dart';
 
-//轮播图类模型
+import '../../config/Config.dart';
 import '../../model/FocusModel.dart';
+import '../../model/ProductModel.dart';
+import '../../services/ScreenAdapter.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
